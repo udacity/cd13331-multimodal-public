@@ -1,0 +1,17 @@
+[project]
+name = "2-logging-and-monitoring"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "arize-phoenix>=12.2.0",
+    "dotenv>=0.9.9",
+    "filetype>=1.2.0",
+    "gradio>=5.49.0",
+    "ipykernel>=6.30.1",
+    "ipywidgets>=8.1.7",
+    "matplotlib>=3.10.6",
+    "openinference-instrumentation-pydantic-ai>=0.1.7",
+    "pydantic-ai-slim[google]>=1.0.15",
+]

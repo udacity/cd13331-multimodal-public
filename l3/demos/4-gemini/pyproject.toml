@@ -1,0 +1,17 @@
+[project]
+name = "4-gemini"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "audiofile>=1.5.1",
+    "datasets>=4.0.0",
+    "dotenv>=0.9.9",
+    "google-genai>=1.36.0",
+    "ipykernel>=6.30.1",
+    "ipywidgets>=8.1.7",
+    "librosa>=0.11.0",
+    "torch>=2.8.0",
+    "torchcodec>=0.7.0",
+]

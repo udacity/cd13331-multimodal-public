@@ -1,0 +1,1 @@
+https://github.com/mjun0812/flash-attention-prebuild-wheels/releases/download/v0.4.12/flash_attn-2.8.3+cu124torch2.8-cp313-cp313-linux_x86_64.whl

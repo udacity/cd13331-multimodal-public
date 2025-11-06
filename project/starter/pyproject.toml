@@ -1,0 +1,60 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "multimodal_moderation"
+version = "0.1.0"
+description = "A multimodal content moderation agent using Google AI"
+readme = "README.md"
+requires-python = ">=3.12"
+license = "MIT"
+authors = [
+    {name = "Giacomo Vianello"}
+]
+
+dependencies = [
+    "fastapi>=0.104.0",
+    "uvicorn[standard]>=0.24.0",
+    "pydantic>=2.0.0",
+    "pydantic-ai>=0.1.0",
+    "google-genai>=0.3.0",
+    "python-dotenv>=1.0.0",
+    "gradio>=4.0.0",
+    "requests>=2.31.0",
+    "filetype>=1.2.0",
+    "arize-phoenix>=12.2.0",
+    "openinference-instrumentation-pydantic-ai>=0.1.7",
+]
+
+[project.scripts]
+multimodal-moderation-api = "multimodal_moderation.fastapi_app:main"
+multimodal-moderation-chat = "multimodal_moderation.gradio_app:main"
+multimodal-moderation = "multimodal_moderation.app:main"
+
+[tool.black]
+line-length = 120
+target-version = ['py312']
+
+[tool.isort]
+profile = "black"
+line_length = 120
+
+[tool.setuptools.packages.find]
+exclude = ["evals*", "tests*"]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]
+
+[dependency-groups]
+dev = [
+    "pytest>=8.4.2",
+    "pytest-asyncio>=1.2.0",
+    "black>=23.0.0",
+    "isort>=5.12.0",
+    "flake8>=6.0.0",
+    "uv>=0.7.8",
+    "pydantic-evals>=1.1.0",
+    "tenacity>=8.0.0",
+]
