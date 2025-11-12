@@ -1,25 +1,53 @@
-# Setup the environment for a lesson
-# Usage:
-# > bash setup_lesson.sh [lesson]
-# Example:
-# > bash setup_lesson.sh l1
-
-lesson="${1}"
-
 export DATA_ROOT=/mnt/test-data
-
 export UV_CACHE_DIR=${DATA_ROOT}/.cache/uv
+export WHEELS_REPO=${DATA_ROOT}/.cache/wheels
+export VENV_ROOT=${DATA_ROOT}/venvs
 
 mkdir -p $UV_CACHE_DIR
+mkdir -p $WHEELS_REPO
+mkdir -p ${VENV_ROOT}
 
-mkdir -p ${DATA_ROOT}/.cache/wheels
+curl -L -O https://github.com/mjun0812/flash-attention-prebuild-wheels/releases/download/v0.4.11/flash_attn-2.8.3+cu124torch2.8-cp312-cp312-linux_x86_64.whl
+mv flash_attn-2.8.3+cu124torch2.8-cp312-cp312-linux_x86_64.whl ${WHEELS_REPO}
 
-if [ "$lesson" == "l1" ]; then
-	curl -L -O https://github.com/mjun0812/flash-attention-prebuild-wheels/releases/download/v0.4.11/flash_attn-2.8.3+cu124torch2.8-cp312-cp312-linux_x86_64.whl
-	mv flash_attn-2.8.3+cu124torch2.8-cp312-cp312-linux_x86_64.whl /workspace/.cache/wheels
-fi
+echo "Searching for pyproject.toml files..."
+pyproject_files=$(find . -name "pyproject.toml" -type f)
+echo "Found files:"
+echo "$pyproject_files"
+echo ""
 
-cd $lesson
-export UV_PROJECT_ENVIRONMENT=/workspace/.venv
-
-uv sync
+for pyproject in $pyproject_files; do
+    echo "----------------------------------------"
+    echo "Processing: $pyproject"
+    
+    # Get the root directory (parent directory of pyproject.toml)
+    root=$(dirname "$pyproject")
+    echo "  Root directory: $root"
+    
+    # Set the environment variable
+    export UV_PROJECT_ENVIRONMENT="${VENV_ROOT}/${root}"
+    echo "  UV_PROJECT_ENVIRONMENT set to: $UV_PROJECT_ENVIRONMENT"
+    
+    # Create the folder
+    echo "  Creating directory: $UV_PROJECT_ENVIRONMENT"
+    mkdir -p "${UV_PROJECT_ENVIRONMENT}"
+    if [ $? -eq 0 ]; then
+        echo "  ✓ Directory created successfully"
+    else
+        echo "  ✗ Failed to create directory"
+        continue
+    fi
+    
+    # Go to the root folder and run uv sync
+    echo "  Changing to directory: $root"
+    echo "  Running: uv sync"
+    (cd "$root" && pwd && uv sync)
+    if [ $? -eq 0 ]; then
+        echo "  ✓ uv sync completed successfully"
+    else
+        echo "  ✗ uv sync failed"
+    fi
+    
+    echo "  Finished processing: $root"
+    echo ""
+done
