@@ -1,11 +1,12 @@
 #!/usr/bin/env python3
 """
-Download all model weights used in the multimodal course notebooks.
-This script pre-downloads all HuggingFace models to populate the cache.
+Download all model weights and datasets used in the multimodal course notebooks.
+This script pre-downloads all HuggingFace models and datasets to populate the cache.
 """
 
 import subprocess
 import torch
+from datasets import load_dataset
 from transformers import (
     AutoProcessor,
     AutoModelForImageTextToText,
@@ -190,8 +191,53 @@ def download_ollama_qwen():
     print(result.stdout)
 
 
+def download_dataset_meld_audio():
+    print("Downloading ajyy/MELD_audio dataset (train split)...")
+    load_dataset("ajyy/MELD_audio", split="train", trust_remote_code=True)
+
+
+def download_dataset_librispeech_dummy():
+    print("Downloading hf-internal-testing/librispeech_asr_dummy dataset (validation split)...")
+    load_dataset("hf-internal-testing/librispeech_asr_dummy", "clean", split="validation")
+
+
+def download_dataset_librispeech_long():
+    print("Downloading distil-whisper/librispeech_long dataset (validation split)...")
+    load_dataset("distil-whisper/librispeech_long", "clean", split="validation")
+
+
+def download_dataset_coco():
+    print("Downloading detection-datasets/coco dataset (val split only, ~1GB)...")
+    load_dataset("detection-datasets/coco", split="val")
+
+
+def download_dataset_oxford_pets():
+    print("Downloading enterprise-explorers/oxford-pets dataset (train split)...")
+    load_dataset("enterprise-explorers/oxford-pets", split="train")
+
+
+def download_dataset_esc50():
+    print("Downloading ashraq/esc50 dataset (train split)...")
+    load_dataset("ashraq/esc50", split="train")
+
+
+def download_dataset_magicbrush():
+    print("Downloading osunlp/MagicBrush dataset (dev split)...")
+    load_dataset("osunlp/MagicBrush", split="dev")
+
+
+def download_dataset_food101():
+    print("Downloading food101 dataset (validation split)...")
+    load_dataset("food101", split="validation")
+
+
+def download_dataset_realworldqa():
+    print("Downloading xai-org/RealworldQA dataset (test split)...")
+    load_dataset("xai-org/RealworldQA", split="test")
+
+
 def main():
-    print("Starting model weight downloads...")
+    print("Starting model weight and dataset downloads...")
     print("=" * 60)
 
     models = [
@@ -210,6 +256,15 @@ def main():
         download_whisper,
         download_yolov9,
         download_ollama_qwen,
+        download_dataset_meld_audio,
+        download_dataset_librispeech_dummy,
+        download_dataset_librispeech_long,
+        download_dataset_coco,
+        download_dataset_oxford_pets,
+        download_dataset_esc50,
+        download_dataset_magicbrush,
+        download_dataset_food101,
+        download_dataset_realworldqa,
     ]
 
     for i, model_func in enumerate(models, 1):
@@ -223,9 +278,16 @@ def main():
 
     print("\n" + "=" * 60)
     print("Download complete!")
+    print("\nSummary:")
+    print("  - Downloaded 13 HuggingFace model weights")
+    print("  - Downloaded 9 HuggingFace datasets (only splits used in notebooks)")
+    print("  - Downloaded 1 YOLOv9 model (if yolo package installed)")
+    print("  - Downloaded 1 Ollama model (if ollama CLI installed)")
     print("\nNotes:")
     print("  - YOLOv9: Requires 'yolo' package. If not installed, this model was skipped.")
     print("  - Ollama: Requires 'ollama' CLI. If not installed, run 'ollama pull qwen2.5vl:3b' manually.")
+    print("  - Datasets downloaded: specific splits only (train/val/test as used in notebooks)")
+    print("  - COCO val split: ~1GB, food101 validation: ~1.4GB")
 
 
 if __name__ == "__main__":
