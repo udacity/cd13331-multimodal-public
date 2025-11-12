@@ -207,8 +207,12 @@ def download_dataset_librispeech_long():
 
 
 def download_dataset_coco():
-    print("Downloading detection-datasets/coco dataset (val split only, ~1GB)...")
-    load_dataset("detection-datasets/coco", split="val")
+    print("Downloading detection-datasets/coco dataset (val split, streaming - 100 samples)...")
+    dataset = load_dataset("detection-datasets/coco", split="val", streaming=True)
+    # Download 100 samples to populate cache
+    for i, _ in enumerate(dataset):
+        if i >= 99:  # 0-99 = 100 samples
+            break
 
 
 def download_dataset_oxford_pets():
@@ -222,8 +226,12 @@ def download_dataset_esc50():
 
 
 def download_dataset_magicbrush():
-    print("Downloading osunlp/MagicBrush dataset (dev split)...")
-    load_dataset("osunlp/MagicBrush", split="dev")
+    print("Downloading osunlp/MagicBrush dataset (dev split, streaming - 1000 samples)...")
+    dataset = load_dataset("osunlp/MagicBrush", split="dev", streaming=True)
+    # Download 1000 samples to populate cache
+    for i, _ in enumerate(dataset):
+        if i >= 999:  # 0-999 = 1000 samples
+            break
 
 
 def download_dataset_food101():
@@ -280,14 +288,14 @@ def main():
     print("Download complete!")
     print("\nSummary:")
     print("  - Downloaded 13 HuggingFace model weights")
-    print("  - Downloaded 9 HuggingFace datasets (only splits used in notebooks)")
+    print("  - Downloaded 9 HuggingFace datasets")
     print("  - Downloaded 1 YOLOv9 model (if yolo package installed)")
     print("  - Downloaded 1 Ollama model (if ollama CLI installed)")
     print("\nNotes:")
     print("  - YOLOv9: Requires 'yolo' package. If not installed, this model was skipped.")
     print("  - Ollama: Requires 'ollama' CLI. If not installed, run 'ollama pull qwen2.5vl:3b' manually.")
-    print("  - Datasets downloaded: specific splits only (train/val/test as used in notebooks)")
-    print("  - COCO val split: ~1GB, food101 validation: ~1.4GB")
+    print("  - Streaming datasets: COCO (100 samples), MagicBrush (1000 samples)")
+    print("  - Full datasets: librispeech, oxford-pets, esc50, food101, RealworldQA, MELD_audio")
 
 
 if __name__ == "__main__":
