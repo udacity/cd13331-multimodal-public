@@ -1,0 +1,4 @@
+{
+  "python.defaultInterpreterPath": "/data/venvs/l2/demos/1-vision-preprocessing/bin/python",
+  "git.openRepositoryInParentFolders": "never"
+}

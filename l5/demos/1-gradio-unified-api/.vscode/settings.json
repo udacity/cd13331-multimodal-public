@@ -1,0 +1,4 @@
+{
+  "python.defaultInterpreterPath": "/data/venvs/l5/demos/1-gradio-unified-api/bin/python",
+  "git.openRepositoryInParentFolders": "never"
+}

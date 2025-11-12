@@ -1,4 +1,4 @@
-export DATA_ROOT=/mnt/test-data
+export DATA_ROOT=/data
 export UV_CACHE_DIR=${DATA_ROOT}/.cache/uv
 export WHEELS_REPO=${DATA_ROOT}/.cache/wheels
 export VENV_ROOT=${DATA_ROOT}/venvs
@@ -21,7 +21,9 @@ for pyproject in $pyproject_files; do
     echo "Processing: $pyproject"
     
     # Get the root directory (parent directory of pyproject.toml)
-    root=$(dirname "$pyproject")
+    # (the sed part is needed to remove the "./" from the path, like in 
+    # ./l1/demos/1-pydantic/)
+    root=$(dirname "$pyproject" | sed "s|\./||g")
     echo "  Root directory: $root"
     
     # Set the environment variable
@@ -47,6 +49,15 @@ for pyproject in $pyproject_files; do
     else
         echo "  ✗ uv sync failed"
     fi
+
+    mkdir -p "$root/.vscode"
+
+cat << EOF > "${root}/.vscode/settings.json"
+{
+  "python.defaultInterpreterPath": "${UV_PROJECT_ENVIRONMENT}/bin/python",
+  "git.openRepositoryInParentFolders": "never"
+}
+EOF
     
     echo "  Finished processing: $root"
     echo ""

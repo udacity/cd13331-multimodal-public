@@ -27,7 +27,7 @@ dependencies = [
 requires-dist = [
     { name = "accelerate", specifier = ">=1.10.1" },
     { name = "dotenv", specifier = ">=0.9.9" },
-    { name = "flash-attn", path = "../../../.cache/wheels/flash_attn-2.8.3+cu124torch2.8-cp312-cp312-linux_x86_64.whl" },
+    { name = "flash-attn", path = "../../../../../data/.cache/wheels/flash_attn-2.8.3+cu124torch2.8-cp312-cp312-linux_x86_64.whl" },
     { name = "google-genai", specifier = ">=1.32.0" },
     { name = "ipykernel", specifier = ">=6.30.1" },
     { name = "ipywidgets", specifier = ">=8.1.7" },
@@ -385,7 +385,7 @@ wheels = [
 [[package]]
 name = "flash-attn"
 version = "2.8.3"
-source = { path = "../../../.cache/wheels/flash_attn-2.8.3+cu124torch2.8-cp312-cp312-linux_x86_64.whl" }
+source = { path = "../../../../../data/.cache/wheels/flash_attn-2.8.3+cu124torch2.8-cp312-cp312-linux_x86_64.whl" }
 dependencies = [
     { name = "einops" },
     { name = "torch" },
