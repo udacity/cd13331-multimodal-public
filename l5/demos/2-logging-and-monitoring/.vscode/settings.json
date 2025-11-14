@@ -1,3 +1,4 @@
 {
+  "python.defaultInterpreterPath": "/voc/data/venvs/l5/demos/2-logging-and-monitoring/bin/python",
   "git.openRepositoryInParentFolders": "never"
 }

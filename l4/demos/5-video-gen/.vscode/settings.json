@@ -1,3 +1,4 @@
 {
+  "python.defaultInterpreterPath": "/voc/data/venvs/l4/demos/5-video-gen/bin/python",
   "git.openRepositoryInParentFolders": "never"
 }

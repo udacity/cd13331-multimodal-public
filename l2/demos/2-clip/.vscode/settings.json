@@ -1,3 +1,4 @@
 {
+  "python.defaultInterpreterPath": "/voc/data/venvs/l2/demos/2-clip/bin/python",
   "git.openRepositoryInParentFolders": "never"
 }

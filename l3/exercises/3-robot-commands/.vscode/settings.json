@@ -1,3 +1,4 @@
 {
+  "python.defaultInterpreterPath": "/voc/data/venvs/l3/exercises/3-robot-commands/bin/python",
   "git.openRepositoryInParentFolders": "never"
 }

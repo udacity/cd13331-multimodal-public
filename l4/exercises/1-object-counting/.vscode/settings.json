@@ -1,3 +1,4 @@
 {
+  "python.defaultInterpreterPath": "/voc/data/venvs/l4/exercises/1-object-counting/bin/python",
   "git.openRepositoryInParentFolders": "never"
 }

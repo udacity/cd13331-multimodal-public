@@ -1,3 +1,4 @@
 {
+  "python.defaultInterpreterPath": "/voc/data/venvs/l4/demos/1-yolo/bin/python",
   "git.openRepositoryInParentFolders": "never"
 }

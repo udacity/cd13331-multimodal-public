@@ -1,3 +1,4 @@
 {
+  "python.defaultInterpreterPath": "/voc/data/venvs/l4/exercises/2-salient-moments/bin/python",
   "git.openRepositoryInParentFolders": "never"
 }

@@ -1,3 +1,4 @@
 {
+  "python.defaultInterpreterPath": "/voc/data/venvs/l3/exercises/1-librosa/bin/python",
   "git.openRepositoryInParentFolders": "never"
 }

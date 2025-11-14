@@ -1,3 +1,4 @@
 {
+  "python.defaultInterpreterPath": "/voc/data/venvs/l2/demos/3-dinov2/bin/python",
   "git.openRepositoryInParentFolders": "never"
 }

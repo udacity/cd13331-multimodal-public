@@ -1,3 +1,4 @@
 {
+  "python.defaultInterpreterPath": "/voc/data/venvs/l1/demos/2-pydantic-ai/bin/python",
   "git.openRepositoryInParentFolders": "never"
 }

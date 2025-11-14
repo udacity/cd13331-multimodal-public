@@ -1,3 +1,4 @@
 {
+  "python.defaultInterpreterPath": "/voc/data/venvs/l3/demos/3-whisper/bin/python",
   "git.openRepositoryInParentFolders": "never"
 }
