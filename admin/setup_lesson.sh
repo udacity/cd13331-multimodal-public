@@ -43,7 +43,7 @@ for pyproject in $pyproject_files; do
     # # Go to the root folder and run uv sync
     echo "  Changing to directory: $root"
     echo "  Running: uv sync"
-    (cd "$root" && pwd && uv sync)
+    (cd "$root" && pwd && uv sync --all-extras --all-groups)
     if [ $? -eq 0 ]; then
         echo "  ✓ uv sync completed successfully"
     else
