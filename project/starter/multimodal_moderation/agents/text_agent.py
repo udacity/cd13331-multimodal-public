@@ -34,19 +34,36 @@ Provide a detailed rationale for your choices as well as a confidence score betw
 #   - instructions=MODERATION_INSTRUCTIONS
 #   - output_type=TextModerationResult
 # Hint: Agent is already imported from pydantic_ai
-text_moderation_agent = None  # Replace with your Agent
+# Note: Using 'result_type' as the keyword argument based on the Step 3 snippet (which showed output_type).
+
+
+# Create a Pydantic AI Agent with instructions and output type
+text_moderation_agent = Agent(
+    instructions=MODERATION_INSTRUCTIONS,
+    output_type=TextModerationResult,
+)
+
+
+
+# TODO: Run the text_moderation_agent with a prompt containing the text,
+#       then return result.output
+# NOTE: in the class we used agent.run_sync but here we need to use
+#       await agent.run since this is an async function. They work exactly
+#       the same. Just do:
+#           result = await agent.run([parameters])
+#       instead of:
+#           result = agent.run_sync([parameters])
+#       like we did in the class.
+# Make sure to pass: model=model_choice.model and model_settings=model_choice.model_settings
+# Run the text_moderation_agent with the provided text, model, and settings
 
 
 async def moderate_text(model_choice: ModelChoice, text: str) -> TextModerationResult:
-
-    # TODO: Run the text_moderation_agent with a prompt containing the text,
-    #       then return result.output
-    # NOTE: in the class we used agent.run_sync but here we need to use
-    #       await agent.run since this is an async function. They work exactly
-    #       the same. Just do:
-    #           result = await agent.run([parameters])
-    #       instead of:
-    #           result = agent.run_sync([parameters])
-    #       like we did in the class.
-    # Make sure to pass: model=model_choice.model and model_settings=model_choice.model_settings
-    raise NotImplementedError("TODO: Implement text moderation")
+    # Run the text_moderation_agent with the provided text, model, and settings
+    result = await text_moderation_agent.run(
+        text,
+        model=model_choice.model,
+        model_settings=model_choice.model_settings,
+    )
+    # Using .output instead of .data based on environment behavior
+    return result.output

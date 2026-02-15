@@ -1,0 +1,4 @@
+{
+  "python.defaultInterpreterPath": "/voc/data/venvs/admin/download_weights/bin/python",
+  "git.openRepositoryInParentFolders": "never"
+}

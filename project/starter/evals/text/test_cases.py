@@ -76,30 +76,24 @@ async def run_text_moderation(inputs: List[TextInput]) -> TextModerationResult:
 #   - TextModerationCheck: Checks boolean flags match expected values
 #   - LLMJudge: Uses an LLM to evaluate if the rationale is good
 cases: List[Case[List[TextInput], TextModerationResult, Any]] = [
-    # TODO: fill in the missing
     Case(
         name="professional_text",
         # Read the text from a file for repeatibility (we could have also inlined it here)
         inputs=[TextInput(text_file=get_test_data_path("professional_text.txt"))],
         metadata={"category": "text_moderation"},
 
-        # TODO: fill the parameters for the evaluators for this case. We need:
-        # 1. A TextModerationCheck that expects expected_pii=False, expected_unfriendly=False, expected_unprofessional=False
-        # 2. An LLMJudge that uses the judge_model and has a rubric that checks that the rationale explains why the text is 
-        #    professional and friendly, with no flags raised. Example: 
-        #    "The rationale should explain why the text is professional and friendly."
         evaluators=(
             # Check that no safety flags are raised for professional text
             TextModerationCheck(
-                expected_pii=...,  # TODO
-                expected_unfriendly=...,  # TODO
-                expected_unprofessional=...,  # TODO
+                expected_pii=False,
+                expected_unfriendly=False,
+                expected_unprofessional=False,
             ),
             # Use judge model to evaluate if the rationale makes sense
             LLMJudge(
-                model=...,  # TODO: add the model to be used as judge (judge_model)
-                rubric=...,  # TODO: add a rubric that checks the rationale explains why the text is professional and friendly.
-                include_input=..., # TODO: in this case it is probably useful to include the input text for context, so set this to True
+                model=judge_model,
+                rubric="The rationale should explain why the text is professional and friendly, with no flags raised.",
+                include_input=True,
             ),
         ),
     ),
@@ -142,13 +136,9 @@ cases: List[Case[List[TextInput], TextModerationResult, Any]] = [
 
 # Create the dataset with all test cases
 # create_repeated_cases() repeats each case EVAL_NUM_REPEATS times to measure consistency
-text_dataset = Dataset[List[TextInput], TextModerationResult, Any](\
-
-    # TODO: use the create_repeated_cases function to create the dataset with the test cases defined above
-    # repeated EVAL_NUM_REPEATS times (as defined in .env). This helps measure consistency of the model under test
-    # and reduces the variance of the measurements.
-    # HINT: you need to pass cases as the argument to create_repeated_cases
-    cases=...,
+text_dataset = Dataset[List[TextInput], TextModerationResult, Any](
+    # Use the create_repeated_cases function to create the dataset with the test cases defined above
+    cases=create_repeated_cases(cases),
     evaluators=[
         # Global evaluators that apply to all test cases
         IsInstance(type_name="TextModerationResult"),  # Check correct return type
@@ -173,11 +163,11 @@ async def main():
     )
 
     # Run all evaluations
-
-    # TODO: call await text_dataset.evaluate() with the appropriate parameters to enable retries
-    # HINT: you need to pass run_text_moderation as the function to test,
-    # and both retry_task and retry_evaluators should be set to retry_config
-    report = ...  # TODO
+    report = await text_dataset.evaluate(
+        run_text_moderation,
+        retry_task=retry_config,
+        retry_evaluators=retry_config,
+    )
 
     # Print results
     report.print(include_input=True, include_output=True, include_durations=False)

@@ -124,6 +124,13 @@ Now that our system is complete, we need to run evaluations to understand and me
    NOTE: your score will NOT always be 100%! that is not a bug. The text agent is not perfect!
 3. Run the evals for the other media (`uv run evals/image/test_cases.py`, `uv run evals/audio/test_cases.py` and `uv run evals/video/test_cases.py`)
 
+### What "Good" Output Looks Like
+When you run the eval scripts (e.g., uv run evals/text/test_cases.py), the Pydantic Evals framework will generate a report in your terminal.
+
+* Successful Run: The script must finish without crashing (no Python RuntimeErrors). You should see a table listing Pass or Fail for each test case.
+* Scoring: It is normal for the score to NOT be 100%. LLM judges are probabilistic, and the text agent may occasionally miss a nuance. A score above 80% generally indicates a healthy model.
+* Debugging: If a test case fails, the report will include the Rationale from the judge explaining why it failed. Use this to understand the model's behavior.
+
 # Play with the app
 
 ## Conversation
