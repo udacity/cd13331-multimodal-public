@@ -15,7 +15,7 @@ dependencies = [
     "pillow>=11.3.0",
     "pydantic-ai-slim[google]>=1.0.2",
     "pylance>=0.35.0",
-    "torch==2.5.1",
+    "torch==2.8.0",
     "torchvision>=0.20.1",
     "transformers>=4.56.0",
 ]
