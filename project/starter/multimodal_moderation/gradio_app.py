@@ -306,7 +306,7 @@ class ChatSessionWithTracing:
                             
                             # TODO: create a BinaryContent object with data=file_bytes and media_type=mime_type
                             # and append it to prompt_parts so it's included in the prompt to the AI
-                            prompt_parts.append(BinaryContent(data=file_bytes))
+                            prompt_parts.append(BinaryContent(data=file_bytes,media_type=mime_type))
 
                         except ValueError as e:
                             raise gr.Error(str(e))
