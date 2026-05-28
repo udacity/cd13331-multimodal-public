@@ -41,7 +41,7 @@ async def moderate_image(
 ) -> ImageModerationResult:
 
     # TODO: Create a BinaryContent object with data=image_source and media_type=media_type
-    image_input = ...  # Replace with your BinaryContent object
+    image_input = BinaryContent(data=image_source, media_type=media_type)  # Replace with your BinaryContent object
 
     # TODO: Run the image_moderation_agent with a list containing a prompt and image_input,
     #       then return result.output
@@ -53,4 +53,11 @@ async def moderate_image(
     #           result = agent.run_sync([parameters])
     #       like we did in the class.
     # Make sure to pass: model=model_choice.model and model_settings=model_choice.model_settings
-    raise NotImplementedError("TODO: Implement image moderation")
+    moderation_result = await image_moderation_agent.run(
+        ["Analyze this image for harmful content.", image_input],
+        message_history=[],
+        model=model_choice.model,
+        model_settings=model_choice.model_settings,
+    )
+
+    return moderation_result.output

@@ -5,6 +5,18 @@ from pydantic import BaseModel, Field
 class ModerationResult(BaseModel):
 
     rationale: str = Field(description="Explanation of what was harmful and why")
+    contains_pii: bool = Field(
+        description="Whether it contains any person or personally-identifiable information (PII)",
+        default=False
+    )
+    is_unfriendly: bool = Field(
+        description="Whether unfriendly tone or content was detected",
+        default=False
+    )
+    is_unprofessional: bool = Field(
+        description="Whether unprofessional tone or content was detected",
+        default=False
+    )
 
 
 class TextModerationResult(ModerationResult):
@@ -40,4 +52,13 @@ class VideoModerationResult(ModerationResult):
 #   - is_unprofessional: bool to contain a flag for whether unprofessional tone or content was detected
 class AudioModerationResult(ModerationResult):
 
-    ...  # Replace with your implementation
+    transcription: str = Field(description="The transcription of the audio")
+    contains_pii: bool = Field(
+        description="Whether the audio contains any person or personally-identifiable information (PII)"
+    )
+    is_unfriendly: bool = Field(
+        description="Whether unfriendly tone or content was detected"
+    )
+    is_unprofessional: bool = Field(
+        description="Whether unprofessional tone or content was detected"
+    )
