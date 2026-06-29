@@ -1,0 +1,30 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "EmbeddedFrameAtom",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["type"],
+  "properties": {
+    "type": { "type": "string", "const": "EmbeddedFrameAtom" },
+    "system": {
+      "$ref": "../common.schema.json#/definitions/system"
+    },
+    "guidance": {
+      "$ref": "../common.schema.json#/definitions/guidance"
+    },
+    "spec": {
+      "type": "object",
+      "additionalProperties": false
+    },
+    "pulled": {
+      "type": "object",
+      "properties": {
+        "external_uri": {
+          "type": "string",
+          "description": "The external url of the embedded frame"
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "VideoAtom",
+  "type": "object",
+  "required": ["type"],
+  "properties": {
+    "type": { "type": "string", "const": "VideoAtom" },
+    "system": {
+      "$ref": "../common.schema.json#/definitions/system"
+    },
+    "guidance": {
+      "$ref": "../common.schema.json#/definitions/guidance"
+    },
+    "spec": {
+      "type": "object",
+      "properties": {},
+      "additionalProperties": false
+    },
+    "pulled": {
+      "type": "object",
+      "properties": {
+        "video": {
+          "$ref": "video-content.schema.json#/definitions/Video"
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

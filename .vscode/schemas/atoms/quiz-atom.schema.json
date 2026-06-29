@@ -1,0 +1,36 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "QuizAtom",
+  "type": "object",
+  "required": ["type"],
+  "properties": {
+    "type": { "type": "string", "const": "QuizAtom" },
+    "system": {
+      "$ref": "../common.schema.json#/definitions/system"
+    },
+    "guidance": {
+      "$ref": "../common.schema.json#/definitions/guidance"
+    },
+    "spec": {
+      "type": "object",
+      "description": "Placeholder for future atom type definition",
+      "additionalProperties": false
+    },
+    "pulled": {
+      "type": "object",
+      "properties": {
+        "question": {
+          "$ref": "quiz-question.schema.json#/definitions/Question"
+        },
+        "answer": {
+          "$ref": "quiz-content.schema.json#/definitions/QuizContent"
+        },
+        "instruction": {
+          "$ref": "quiz-content.schema.json#/definitions/QuizContent"
+        }
+      }
+    }
+  },
+  "additionalProperties": false
+}
+

@@ -1,0 +1,25 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ImageAtom",
+  "type": "object",
+  "required": ["type"],
+  "properties": {
+    "type": { "type": "string", "const": "ImageAtom" },
+    "system": {
+      "$ref": "../common.schema.json#/definitions/system"
+    },
+    "guidance": {
+      "$ref": "../common.schema.json#/definitions/guidance"
+    },
+    "spec": {
+      "type": "object",
+      "properties": {
+        "caption": { "type": "string" },
+        "alt": { "type": "string" }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}
+

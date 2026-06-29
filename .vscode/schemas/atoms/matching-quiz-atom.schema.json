@@ -1,0 +1,118 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "MatchingQuizAtom",
+  "type": "object",
+  "required": ["type"],
+  "properties": {
+    "type": { "type": "string", "const": "MatchingQuizAtom" },
+    "system": {
+      "$ref": "../common.schema.json#/definitions/system"
+    },
+    "guidance": {
+      "$ref": "../common.schema.json#/definitions/guidance"
+    },
+    "spec": {
+      "type": "object",
+      "required": ["question"],
+      "additionalProperties": false,
+      "properties": {
+        "question": {
+          "type": "object",
+          "required": ["complex_prompt", "concepts", "answers"],
+          "properties": {
+            "complex_prompt": { 
+              "type": "object",
+              "description": "Question prompt",
+              "required": ["text"],
+              "properties": {
+                "text": {
+                  "type": "string",
+                  "description": "Question prompt text"
+                }
+              },
+              "additionalProperties": false
+            },
+            "correct_feedback": { 
+              "type": "string",
+              "description": "Feedback for when the user answers correctly"
+            },
+            "default_feedback": { 
+              "type": "string",
+              "description": "Default feedback for when the user answers incorrectly and there is no incorrect_feedback for any matched concepts"
+            },
+            "concepts_label": { 
+              "type": "string",
+              "description": "Optional label to appear above concept column"
+            },
+            "answers_label": { 
+              "type": "string",
+              "description": "Optional label to appear above answer column"
+            },
+            "concepts": {
+              "type": "array",
+              "description": "Concepts to be matched with answers",
+              "items": {
+                "type": "object",
+                "required": ["text", "correct_answer_id"],
+                "properties": {
+                  "text": { 
+                    "type": "string",
+                    "description": "Concept text"
+                  },
+                  "default_concept_feedback": { 
+                    "type": "string",
+                    "description": "Default feedback for when the concept is incorrectly matched, and no incorrect_feedback is provided"
+                  },
+                  "incorrect_feedbacks": {
+                    "type": "array",
+                    "description": "Specific feedback for incorrect matches",
+                    "items": {
+                      "type": "object",
+                      "required": ["answer_id"],
+                      "properties": {
+                        "answer_id": { 
+                          "type": "string",
+                          "description": "Id of answer"
+                        },
+                        "incorrect_feedback": { 
+                          "type": "string",
+                          "description": "Custom feedback to provide user if they matched this answer_id to the concept"
+                        }
+                      },
+                      "additionalProperties": false
+                    }
+                  },
+                  "correct_answer_id": { 
+                    "type": "string",
+                    "description": "The id of the answer that correctly matches this concept"
+                  }
+                },
+                "additionalProperties": false
+              }
+            },
+            "answers": {
+              "type": "array",
+              "description": "Answers to be matched with concepts",
+              "items": {
+                "type": "object",
+                "required": ["id", "text"],
+                "properties": {
+                  "id": { 
+                    "type": "string",
+                    "description": "Answer id"
+                  },
+                  "text": { 
+                    "type": "string",
+                    "description": "Answer text"
+                  }
+                },
+                "additionalProperties": false
+              }
+            }
+          },
+          "additionalProperties": false
+        }
+      }
+    }
+  }
+}

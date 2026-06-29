@@ -1,0 +1,29 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Lab",
+  "type": "object",
+  "required": ["type"],
+  "properties": {
+    "type": {
+      "type": "string",
+      "const": "Lab"
+    },
+    "system": {
+      "$ref": "./common.schema.json#/definitions/system"
+    },
+    "guidance": {
+      "$ref": "./common.schema.json#/definitions/guidance"
+    },
+    "pulled": {
+      "type": "object",
+      "properties": {
+        "workspace_id": {
+          "type": "string",
+          "description": "The id of the workspace for the lab"
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}
