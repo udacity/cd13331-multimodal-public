@@ -1,7 +1,0 @@
-{
-    "yaml.schemas": {
-        "file:///Users/s.a.kulshrestha/Documents/content/cd13331-multimodal-public/.vscode/schemas/concept.schema.json": "lessons/*/concepts/*/concept.yaml",
-        "file:///Users/s.a.kulshrestha/Documents/content/cd13331-multimodal-public/.vscode/schemas/lesson.schema.json": "lessons/*/lesson.yaml",
-        "file:///Users/s.a.kulshrestha/Documents/content/cd13331-multimodal-public/.vscode/schemas/course.schema.json": "course.yaml"
-    }
-}
