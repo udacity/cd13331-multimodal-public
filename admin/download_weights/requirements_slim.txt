@@ -1,0 +1,10 @@
+datasets==3.6.0
+imageio==2.37.2
+ipykernel==7.1.0
+ipywidgets==8.1.8
+matplotlib==3.10.7
+num2words==0.5.14
+rich==14.0.0
+supervision==0.26.1
+transformers==4.57.1
+yolo @ git+https://github.com/WongKinYiu/YOLO.git@4a9a286d31c02d387330b5bcdc197e1bd1860cbd
